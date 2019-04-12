@@ -3,8 +3,18 @@ defmodule Rumbl.Multimedia do
   alias Rumbl.Repo
 
   alias Rumbl.Multimedia.Video
-  alias Rumbl.Multimedia
   alias Rumbl.Accounts
+  alias Rumbl.Multimedia.Category
+
+  def create_category(name) do
+    Repo.get_by(Category, name: name) || Repo.insert!(%Category{name: name})
+  end
+
+  def list_alphabetical_categories do
+    Category
+    |> Category.alphabetical()
+    |> Repo.all()
+  end
 
   def list_videos do
     Repo.all(Video)
