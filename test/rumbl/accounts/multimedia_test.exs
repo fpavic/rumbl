@@ -6,10 +6,10 @@ defmodule Rumbl.MultimediaTest do
   describe "categories" do
     test "list_alphabetical_categories/0" do
       for name <- ~w(Drama Action Comedy), do: Multimedia.create_category(name)
-        alpha_names =
-          for %Category{name: name} <- Multimedia.list_alphabetical_categories() do
-            name
-          end
+      alpha_names =
+        for %Category{name: name} <- Multimedia.list_alphabetical_categories() do
+          name
+        end
       assert alpha_names == ~w(Action Comedy Drama)
     end
   end
@@ -31,11 +31,13 @@ defmodule Rumbl.MultimediaTest do
     test "get_video!/1 returns the video with given id" do
       owner = user_fixture()
       %Video{id: id} = video_fixture(owner)
+
       assert %Video{id: ^id} = Multimedia.get_video!(id)
     end
 
     test "create_video/2 with valid data creates a video" do
       owner = user_fixture()
+
       assert {:ok, %Video{} = video} = Multimedia.create_video(owner, @valid_attrs)
       assert video.description == "desc"
       assert video.title == "title"
