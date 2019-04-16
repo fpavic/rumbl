@@ -1,6 +1,8 @@
 defmodule RumblWeb.UserSocket do
   use Phoenix.Socket
 
+  channel "videos:*", RumblWeb.VideoChannel
+
   ## Channels
   # channel "room:*", RumblWeb.RoomChannel
 
@@ -15,7 +17,7 @@ defmodule RumblWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket, _connect_info) do
+  def connect(_params, socket) do
     {:ok, socket}
   end
 
